@@ -2,6 +2,14 @@
 
 Daily Diary is an application to store daily diary entries, using Sinatra and PostgreSQL.
 
+## Instructions:
+
+1. Clone/download this project
+2. Run 'bundle install'
+3. Connect to Postgres by running 'psql' in your terminal
+4. Create a database called 'diary' and a test database called 'diary_test'
+5. Execute the queries in db/migrations in the correct order (for each database)
+
 ## Functionality:
 
 - [ ] Add diary entry
