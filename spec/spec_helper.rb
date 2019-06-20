@@ -1,5 +1,6 @@
-ENV['RACK_ENV'] = 'test'
-# ENV['ENVIRONMENT'] = 'test'
+require 'test_db'
+
+ENV['ENVIRONMENT'] = 'test'
 
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 
@@ -13,6 +14,9 @@ require 'simplecov'
 require 'simplecov-console'
 
 RSpec.configure do |config|
+  config.before(:each) do
+    setup_test_db
+  end
   config.include Capybara::DSL
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true

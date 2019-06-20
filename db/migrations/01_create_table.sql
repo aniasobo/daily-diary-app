@@ -1,1 +1,1 @@
-CREATE TABLE entries (id SERIAL NOT NULL PRIMARY KEY, date_created DATE NOT NULL, title VARCHAR(50), contents VARCHAR);
+CREATE TABLE entries (id SERIAL NOT NULL PRIMARY KEY, title VARCHAR(50), contents VARCHAR);

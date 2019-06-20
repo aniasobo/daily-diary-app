@@ -15,7 +15,7 @@ feature 'Adding a diary entry' do
   scenario 'add a new diary entry and get the success message' do
     visit '/'
     fill_in 'title', with: 'dear diary'
-    fill_in 'contents', with: 'it was a dark and stormy night'
+    fill_in 'contents', with: 'It was a clear black night, a clear white moon Warren G. is on the streets, trying to consume'
     click_button 'Save to Diary'
     expect(page).to have_content('dear diary saved')
   end
