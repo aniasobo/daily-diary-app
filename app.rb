@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require_relative './lib/entry.rb'
-require_relative './lib/db.rb'
+# require_relative './lib/db.rb'
 
 class DailyDiary < Sinatra::Base
   enable :method_override
@@ -11,9 +11,14 @@ class DailyDiary < Sinatra::Base
 
   post '/entry' do
     @title = params[:title]
-    contents = params[:contents]
-    @entry = Entry.create(@title, contents)
-    redirect '/'
+    @contents = params[:contents]
+    Entry.create(@title, @contents)
+    redirect '/saved'
+  end
+
+  get '/saved' do    
+    # timestamp will be passed here
+    erb :saved_entry
   end
 
   run! if app_file == $0

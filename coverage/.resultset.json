@@ -3,8 +3,17 @@
     "coverage": {
       "/Users/anna/Documents/projects/daily-diary-app/spec/entry_spec.rb": [
         1,
+        1,
         null,
         null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
         1,
         1,
         1,
@@ -49,6 +58,6 @@
         null
       ]
     },
-    "timestamp": 1561112216
+    "timestamp": 1561116103
   }
 }

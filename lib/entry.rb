@@ -3,6 +3,10 @@ require 'pg'
 
 class Entry
 
+  attr_reader :id
+  attr_reader :title
+  attr_reader :contents
+
   def self.create(title, contents)
     if ENV['ENVIRONMENT'] == 'test'
       plug = PG.connect(dbname: 'diary_test')
