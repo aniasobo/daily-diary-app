@@ -18,4 +18,16 @@ describe Entry do
     pending 'does not save the entry without title'
     
   end
+
+  describe '.find' do
+    it 'retrieves the correct entry' do
+      title = 'It was a clear black night, a clear white moon'
+      contents = 'Warren G. is on the streets, trying to consume'
+      entry = Entry.create(title, contents)
+      found_entry = Entry.find(title)
+      expect(found_entry.title).to eq(title)
+      expect(found_entry.contents).to eq(contents)
+      expect(found_entry.id).to eq(entry.id)
+    end
+  end
 end
