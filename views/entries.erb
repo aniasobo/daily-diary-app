@@ -1,0 +1,9 @@
+<h1>Click on title to view contents</h1>
+<ol>
+  <% @entries.each do |entry| %>
+  <li><form action="/entries/<% entry.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="put" />
+  <a href="/entries/<% entry.id %>"><%= entry.title %></a></form>
+  </li>
+<% end %>
+</ol>

@@ -9,7 +9,16 @@ class DailyDiary < Sinatra::Base
     erb :index
   end
 
-  post '/entry' do
+  get '/entries' do
+    @entries = Entry.all
+    erb :entries
+  end
+
+  get '/new' do
+    erb :new
+  end
+
+  post '/new_entry' do
     @title = params[:title]
     @contents = params[:contents]
     Entry.create(@title, @contents)
@@ -19,6 +28,14 @@ class DailyDiary < Sinatra::Base
   get '/saved' do    
     # timestamp will be passed here
     erb :saved_entry
+  end
+
+  get '/entries/:id/entry' do
+    @found_entry = Entry.find(params[:id])
+    p @found_entry
+    p "Am I executing? What the heck?"
+    erb :entry
+  # redirect "/entries/#{params[:id]}"
   end
 
   run! if app_file == $0
