@@ -1,16 +1,23 @@
 require_relative 'db'
+require 'pg'
 
 class Entry
 
   def self.create(title, contents)
-    DatabaseConnect.execute("INSERT INTO entries 
-      (title, contents) VALUES ('#{title}', '#{contents}');")  
-      true
+    if ENV['ENVIRONMENT'] == 'test'
+      plug = PG.connect(dbname: 'diary_test')
+    else
+      plug = PG.connect(dbname: 'diary')
+    end
+    result = plug.exec("INSERT INTO entries 
+      (title, contents) VALUES ('#{title}', '#{contents}') 
+      RETURNING id, title, contents;")  
+    Entry.new(result[0]['id'], result[0]['title'], result[0]['contents'])
   end
 
-  def initialize(title, date, contents)
+  def initialize(id, title, contents)
+    @id = id
     @title = title
-    @date = date
     @contents = contents
   end
 end

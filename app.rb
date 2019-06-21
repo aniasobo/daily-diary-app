@@ -1,7 +1,10 @@
 require 'sinatra/base'
-require_relative './lib/entry'
+require_relative './lib/entry.rb'
+require_relative './lib/db.rb'
 
 class DailyDiary < Sinatra::Base
+  enable :method_override
+
   get '/' do
     erb :index
   end
