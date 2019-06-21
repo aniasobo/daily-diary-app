@@ -11,6 +11,9 @@ class DailyDiary < Sinatra::Base
 
   get '/entries' do
     @entries = Entry.all
+    p @entries
+    p "THIS IS THE BUG PARAMS ARE EMPTY"
+    p params
     erb :entries
   end
 
@@ -30,8 +33,10 @@ class DailyDiary < Sinatra::Base
     erb :saved_entry
   end
 
-  get '/entries/:id/entry' do
-    @found_entry = Entry.find(params[:id])
+  get '/entries/:id' do
+    p "I PRINT YOUR PARAMS"
+    p params
+    @found_entry = Entry.find(params[:title])
     p @found_entry
     p "Am I executing? What the heck?"
     erb :entry
