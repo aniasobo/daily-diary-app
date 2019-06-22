@@ -2,16 +2,16 @@ require 'entry'
 require 'pg'
 
 describe Entry do
+  @one = 'It was a clear black night, a clear white moon'
+  @two = 'Warren G. is on the streets, trying to consume'
   describe '.create' do
     it 'saves the diary entry' do
-      entry = Entry.create('It was a clear black night, a clear white moon',
-        'Warren G. is on the streets, trying to consume')
+      entry = Entry.create(@one, @two)
       test_entry_data = PG.connect(dbname: 'diary_test').exec("SELECT * FROM entries WHERE id = #{entry.id};")
-
       expect(entry).to be_a(Entry)
       expect(entry.id).to eq(test_entry_data.first['id'])
-      expect(entry.title).to eq('It was a clear black night, a clear white moon')
-      expect(entry.contents).to eq('Warren G. is on the streets, trying to consume')
+      expect(entry.title).to eq("#{@one}")
+      expect(entry.contents).to eq("#{@two}")
     end
 
     pending 'does not save the entry without title'
@@ -19,19 +19,23 @@ describe Entry do
   end
 
   describe '.find' do
-    it 'retrieves the correct entry' do
-      title = 'It was a clear black night, a clear white moon'
-      contents = 'Warren G. is on the streets, trying to consume'
-      new_entry = Entry.create(title, contents)
+    it 'retrieves the correct entry by id' do
+      new_entry = Entry.create(@one, @two)
       id = new_entry.id
       found_entry = Entry.find(id)
-      expect(found_entry.title).to eq(title)
-      expect(found_entry.contents).to eq(contents)
+      expect(found_entry.title).to eq("#{@one}")
+      expect(found_entry.contents).to eq("#{@two}")
     end
   end
 
   describe '.all' do
-    xit 'retrieves all diary entries' do
+    it 'retrieves all diary entries' do
+      new_entry = Entry.create(@one, @two)
+      newer_entry = Entry.create(@two, @one)
+      both = Entry.all
+      expect(both).to be_a(Array)
+      expect(both.first.title).to eq("#{@one}")
+      expect(both.last.title).to eq("#{@two}")
     end
   end
 end

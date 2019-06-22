@@ -24,8 +24,8 @@ class Entry
     else
       plug = PG.connect(dbname: 'diary')
     end
-    all_entries = plug.exec("SELECT * FROM entries;")
-    all_entries.map {|entry| Entry.new(entry['id'], entry['title'], entry['contents'])}
+    all_entries = plug.exec('SELECT * FROM entries;')
+    all_entries.map { |entry| Entry.new(entry['id'], entry['title'], entry['contents']) }
   end
 
   def self.find(find_id)

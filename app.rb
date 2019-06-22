@@ -31,7 +31,7 @@ class DailyDiary < Sinatra::Base
     redirect '/saved'
   end
 
-  get '/saved' do    
+  get '/saved' do
     erb :saved_entry
   end
 
