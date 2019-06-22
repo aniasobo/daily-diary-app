@@ -2,7 +2,7 @@
 # So that I can keep a daily diary
 # I want to be able to add a new Diary Entry
 
-feature 'Adding a diary entry' do
+RSpec.feature 'Adding a diary entry' do
   scenario 'click on add new link on homepage and see add new entry link' do
     visit '/'
     expect(page).to have_content('Daily Diary app for serious coders')
