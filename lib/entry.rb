@@ -1,4 +1,3 @@
-require_relative 'db'
 require 'pg'
 
 class Entry
@@ -29,13 +28,13 @@ class Entry
     all_entries.map {|entry| Entry.new(entry['id'], entry['title'], entry['contents'])}
   end
 
-  def self.find(selected_title)
+  def self.find(find_id)
     if ENV['ENVIRONMENT'] == 'test'
       plug = PG.connect(dbname: 'diary_test')
     else
       plug = PG.connect(dbname: 'diary')
     end
-    found_entry = plug.exec("SELECT * FROM entries WHERE title = '#{selected_title}';")
+    found_entry = plug.exec("SELECT * FROM entries WHERE id = #{find_id};")
     Entry.new(found_entry[0]['id'], found_entry[0]['title'], found_entry[0]['contents'])
   end
 

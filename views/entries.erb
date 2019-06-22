@@ -1,6 +1,6 @@
 <h1>Click on title to view contents</h1>
 <ol>
   <% @entries.each do |entry| %>
-  <li><a href="/entries/<% entry.id %>"><%= entry.title %></a></li>
+  <li><a href=/entries/<%= entry.id() %>><%= entry.title() %></a></li>
 <% end %>
 </ol>

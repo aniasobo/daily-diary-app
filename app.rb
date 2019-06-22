@@ -4,6 +4,7 @@ require_relative './lib/entry.rb'
 
 class DailyDiary < Sinatra::Base
   enable :method_override
+  enable :sessions
 
   get '/' do
     erb :index
@@ -11,10 +12,12 @@ class DailyDiary < Sinatra::Base
 
   get '/entries' do
     @entries = Entry.all
-    p @entries
-    p "THIS IS THE BUG PARAMS ARE EMPTY"
-    p params
     erb :entries
+  end
+
+  get '/entries/:id' do
+    @found_entry = Entry.find(:id)
+    erb :entry
   end
 
   get '/new' do
@@ -29,18 +32,7 @@ class DailyDiary < Sinatra::Base
   end
 
   get '/saved' do    
-    # timestamp will be passed here
     erb :saved_entry
-  end
-
-  get '/entries/:id' do
-    p "I PRINT YOUR PARAMS"
-    p params
-    @found_entry = Entry.find(params[:title])
-    p @found_entry
-    p "Am I executing? What the heck?"
-    erb :entry
-  # redirect "/entries/#{params[:id]}"
   end
 
   run! if app_file == $0
